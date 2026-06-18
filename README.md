@@ -2,7 +2,7 @@
 
 A modern, full-stack AI Chatbot application with a sleek dark-mode UI, built with a Next.js frontend and a high-performance FastAPI Python backend powered by LangChain and Groq.
 
-**🔗 Live Demo:** [https://amit-mbhddnsq5-amit090912s-projects.vercel.app/](https://amit-mbhddnsq5-amit090912s-projects.vercel.app/)
+**🔗 Live Demo:** [https://ai-chat-bot-xi-ten-70.vercel.app/](https://ai-chat-bot-xi-ten-70.vercel.app/)
 
 ---
 
