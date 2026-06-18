@@ -66,10 +66,11 @@ prompt = ChatPromptTemplate.from_messages([
 
 chain = prompt | llm
 
+store = {}
+
 def get_session_history(session_id: str):
-    history = ChatMessageHistory()
     if engine and SessionLocal:
-        # Load from TiDB
+        history = ChatMessageHistory()
         db = SessionLocal()
         try:
             messages = db.query(ChatMessage).filter(ChatMessage.session_id == session_id).order_by(ChatMessage.created_at.asc()).all()
@@ -80,7 +81,12 @@ def get_session_history(session_id: str):
                     history.add_ai_message(msg.content)
         finally:
             db.close()
-    return history
+        return history
+    else:
+        # Fallback to in-memory store if DB is not connected
+        if session_id not in store:
+            store[session_id] = ChatMessageHistory()
+        return store[session_id]
 
 chain_with_memory = RunnableWithMessageHistory(
     chain,
